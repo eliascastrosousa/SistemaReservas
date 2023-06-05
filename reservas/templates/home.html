@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+ 
+{% block 'titulo' %}Dashboard {% endblock%}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock%}
+
+
+{% block 'body' %}
+<div class="container">
+    
+	<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+            <label for="first-name" class="block text-sm font-medium leading-6 text-white-900">Origem</label>
+            <div class="mt-2">
+                <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+        </div>
+        
+        <div class="sm:col-span-3">
+            <label for="last-name" class="block text-sm font-medium leading-6 text-white-900">Destino</label>
+            <div class="mt-2">
+                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
