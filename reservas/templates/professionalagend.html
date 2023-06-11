@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo' %}Dashboard {% endblock%}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock%}
+
+
+{% block 'body' %}
+<div class="container-sm ">
+
+    <div class="p-4">
+        <h2 class="mt-10 p-2 text-center text-2xl font-bold leading-9 tracking-tight text-white-900">Abrir Agenda
+        </h2>
+        <hr>
+    </div>
+
+
+    <form class="row g-3 needs-validation p-4" action="#" method="POST">
+        {% csrf_token %}
+        <div class="col-md-4">
+            <label for="validationCustom01" class="form-label">Nome do Medico: </label>
+            <select class="form-select" aria-label="Default select example">
+                {% for medicos in medicos %}
+                    <option value="{{medicos.crm}}">{{medicos.nome}} {{medicos.sobrenome}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div></div>
+        
+        <div class="col-md-4">
+            <label for="validationCustom01" class="form-label">Data: </label>
+            <input type="date" class="form-control" name="" id="">
+        </div>
+        <div></div>
+        
+        <div class="col-md-4">
+            <label for="validationCustom01" class="form-label">Horario: </label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="08:00 às 09:00">08:00 às 09:00</option>
+                <option value="09:00 às 10:00">09:00 às 10:00</option>
+                <option value="10:00 às 11:00">10:00 às 11:00</option>
+                <option value="11:00 às 12:00">11:00 às 12:00</option>
+                <option value="12:00 às 13:00">12:00 às 13:00</option>
+                <option value="13:00 às 14:00">13:00 às 14:00</option>
+                <option value="14:00 às 15:00">14:00 às 15:00</option>
+                <option value="15:00 às 16:00">15:00 às 16:00</option>
+                <option value="16:00 às 17:00">16:00 às 17:00</option>
+                <option value="17:00 às 18:00">17:00 às 18:00</option>
+                <option value="18:00 às 19:00">18:00 às 19:00</option>
+                <option value="19:00 às 20:00">19:00 às 20:00</option>
+            </select>
+        </div>
+        <div></div>
+
+        <div>
+            <button class="btn btn-primary" type="submit">Registrar</button>
+        </div>
+    </form>
+
+
+    {% endblock %}

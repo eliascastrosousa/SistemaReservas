@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo' %}Pesquisa de Profissional{% endblock%}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock%}
+
+
+{% block 'body' %}
+<div class="container p-4">
+    <p>Profissionais com a palavra </p>
+
+    <p>Resultados encontrados</p>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">CRM</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Sobrenome</th>
+            <th scope="col">Especialidade</th>
+            <th scope="col">Cep</th>
+            <th scope="col">Logradouro</th>
+            <th scope="col">Numero</th>
+            <th scope="col">Cidade</th>
+            <th scope="col">Estado</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Mark</td>
+            
+          </tr>
+        </tbody>
+      </table>
+
+        
+</div>
+
+{% endblock %}

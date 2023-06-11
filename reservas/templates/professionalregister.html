@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo' %}Registrar Profissional{% endblock%}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+            integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+            crossorigin="anonymous"></script>
+<script src="{% static 'js/javascript.js' %}"></script>
+{% endblock%}
+
+
+{% block 'body' %}
+<div class="container-sm ">
+
+    <div class="p-4">
+        <h2 class="mt-10 p-2 text-center text-2xl font-bold leading-9 tracking-tight text-white-900">Cadastrar Médico
+        </h2>
+        <hr>
+    </div>
+
+    
+
+    <form class="row g-3 needs-validation p-4" action="{% url 'cadastrar_medico' %}" method="POST">
+        {% csrf_token %}
+
+        <h4>Dados Pessoais</h4>
+
+        <div class="col-md-2">
+            <label for="validationCustom01" class="form-label">Nome:</label>
+            <input type="text" class="form-control" name="nome" required>
+            
+        </div>
+        <div class="col-md-3">
+            <label for="validationCustom02" class="form-label">Sobrenome:</label>
+            <input type="text" class="form-control" name="sobrenome"  required>
+        </div>
+        <div class="col-md-3">
+            <label for="validationCustom02" class="form-label">Data Nascimento:</label>
+            <input type="date" class="form-control" name="datanasc"  required>
+        </div>
+        <div class="col-md-2">
+            <label for="validationCustomUsername" class="form-label">CRM:</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" name="crm"
+                    maxlength="7" required>
+                
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label for="validationCustom01" class="form-label">Especialidade:</label>
+            <select class="form-select" aria-label="Default select example" name="especialidade">
+                {% for especialidades in especialidades %}
+                    <option value="{{especialidades.nome}}">{{especialidades.nome}}</option>
+                {% endfor %}
+              </select>
+              <a href="{% url 'specialtyregister' %}"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus-square mt-2" viewBox="0 0 16 16">
+                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg></a>
+
+        </div>
+
+        <h4>Dados de Contato</h4>
+
+        <div class="col-md-4">
+            <label for="validationCustom01" class="form-label">E-mail:</label>
+            <input type="email" class="form-control" name="email" required>
+            
+        </div>
+
+        <div class="col-md-3">
+            <label for="validationCustom01" class="form-label">Telefone:</label>
+            <input type="text" class="form-control" name="telefone" maxlength="11">
+           
+        </div>
+
+        <h4>Local de Atendimento</h4>
+
+        <div class="col-md-2">
+            <label for="validationCustom05" class="form-label">CEP: </label>
+            <input type="text" class="form-control" id="cep" name="cep" required>
+            <div class="invalid-feedback">
+               Por favor, digite o CEP correto
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <label for="validationCustom05" class="form-label">Endereço: </label>
+            <input type="text" class="form-control" id="rua">
+        </div>
+
+        <div class="col-md-2">
+            <label for="validationCustom05" class="form-label">Numero: </label>
+            <input type="text" class="form-control" name="num">
+        </div>
+
+        <div class="col-md-3">
+            <label for="validationCustom05" class="form-label">Complemento: </label>
+            <input type="text" class="form-control" name="complemento">
+        </div>
+
+        <div class="col-md-3">
+            <label for="validationCustom03" class="form-label">
+                Bairro:</label>
+            <input type="text" class="form-control" id="bairro">
+            
+        </div>
+
+        <div class="col-md-2">
+            <label for="validationCustom03" class="form-label">Cidade: </label>
+            <input type="text" class="form-control" id="cidade">
+            
+        </div>
+        <div class="col-md-1">
+            <label for="validationCustom04" class="form-label">Estado: </label>
+            <input type="text" class="form-control" id="uf">
+            
+        </div>
+
+        <div>
+            <button class="btn btn-primary" type="submit">Cadastrar</button>
+        </div>
+    </form>
+
+
+    
+</div>
+
+{% endblock %}

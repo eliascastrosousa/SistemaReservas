@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo' %}Registrar Especialidade{% endblock%}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock%}
+
+
+{% block 'body' %}
+<div class="container-sm ">
+
+    <div class="p-4">
+        <h2 class="mt-10 p-2 text-center text-2xl font-bold leading-9 tracking-tight text-white-900">Cadastrar Especialidade
+        </h2>
+        <hr>
+    </div>
+
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <h4>Especialidade</h4>
+            <form class="row g-3 needs-validation p-4" action="{% url 'cadastrar_especialidade' %}" method="POST">
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <label for="validationCustom01" class="form-label">Nome:</label>
+                    <input type="text" class="form-control" name="nome" required>
+                    <button class="btn btn-primary p-2 mt-2" type="submit">Cadastrar</button>
+                </div>
+                
+        
+            </form>
+          </div>
+          <div class="col">
+            <h4>Especialidade cadastradas</h4>
+            <ul class="list-group p-4">
+                {% for itens in especialidades %}
+                    <li class="list-group-item">{{itens.nome}}</li>
+                {% endfor %}
+              </ul>
+
+          </div>
+        </div>
+      </div>
+
+    
+
+{% endblock %}
