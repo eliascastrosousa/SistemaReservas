@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo' %}Agendamento{% endblock%}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock%}
+
+
+{% block 'body' %}
+<div class="container-sm ">
+
+    <div class="p-4">
+        <h2 class="mt-10 p-2 text-center text-2xl font-bold leading-9 tracking-tight text-white-900">Agendar Consulta
+        </h2>
+        <hr>
+    </div>
+
+    <div class="row">
+
+        <div class="col">
+
+            <form class="row g-3 needs-validation" role="search" method="GET"
+                action="{% url 'schedulingregistersearchpatient' %}">
+                {% csrf_token %}
+                <h4>Encontrar Paciente</h4>
+                <div class="col-md-6">
+                    <input class="form-control me-2" type="search" placeholder="Buscar por Nome ou CPF"
+                        aria-label="Search" name="search">
+                    <button class="btn btn-info mt-2 " type="submit">Pesquisar</button>
+                    <a href="{% url 'schedulingregister' %}"> <input type="button" value="Limpar"
+                            class="btn btn-unline-warning mt-2"> </a>
+                </div>
+            </form>
+
+
+
+
+            <form class="row g-3 needs-validation" novalidate action="{% url 'saveconsulting' %}">
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <p>Medico e Especialidade</p>
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-lg example" name="crm">
+                        <option selected>Toque para selecionar </option>
+
+                        {% for medico in medico %}
+                        <option value="{{medico.crm}}">{{medico.nome}} {{medico.sobrenome}} | {{medico.especialidade}}
+                        </option>
+                        {% empty %}
+                        <option value="">Nenhum Médico encontrado.</option>
+                        {% endfor %}
+                    </select>
+
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="data">
+                        <option selected>Toque para selecionar </option>
+
+                        {% for agenda in agenda %}
+                        {% for medico in medico %}
+                        {% if agenda.nome == medico.nome %}
+                        <option value="{{agenda.data}}">{{agenda.nome}} {{agenda.data}} {{agenda.horario}}</option>
+                        <p name="horario" value="{{agenda.horario}}">{{agenda.horario}}</p>
+                        {% endif %}
+                        {% empty %}
+                        <option value="">Nenhum horario encontrado.</option>
+                        {% endfor %}
+                        {% endfor %}
+                    </select>
+
+
+
+
+
+                    <h4>Dados Paciente</h4>
+                    {% for paciente in paciente %}
+                    <ul class="list-group p-4" name="cpf">
+                        <li class="list-group-item" value="{{ paciente.cpf }}">Nome: {{ paciente.nome }} CPF: {{paciente.cpf }}</li>
+                        <li class="list-group-item">Idade: {{ paciente.datanasc }}</li>
+                        <li class="list-group-item">E-mail: {{ paciente.email }}</li>
+                        <li class="list-group-item">Telefone: {{ paciente.telefone }}</li>
+                    </ul>
+                    {% empty %}
+                    <ul class="list-group p-4">
+                        <li class="list-group-item">Nenhum paciente encontrado</li>
+                    </ul>
+                    {% endfor %}
+
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Create</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+{% endblock %}

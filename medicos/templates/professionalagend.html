@@ -18,27 +18,28 @@
     </div>
 
 
-    <form class="row g-3 needs-validation p-4" action="#" method="POST">
+    <form class="row g-3 needs-validation p-4" action="{% url 'saveprofessionalagend' %}" method="POST">
         {% csrf_token %}
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Nome do Medico: </label>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example" name="nome" required >
                 {% for medicos in medicos %}
-                    <option value="{{medicos.crm}}">{{medicos.nome}} {{medicos.sobrenome}}</option>
+                    <option value="{{medicos.nome}}">{{medicos.nome}} {{medicos.sobrenome}}</option>
                 {% endfor %}
             </select>
+
         </div>
         <div></div>
         
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Data: </label>
-            <input type="date" class="form-control" name="" id="">
+            <input type="date" class="form-control" name="data" id="" required>
         </div>
         <div></div>
         
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Horario: </label>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example" name="horario" required>
                 <option selected>Open this select menu</option>
                 <option value="08:00 às 09:00">08:00 às 09:00</option>
                 <option value="09:00 às 10:00">09:00 às 10:00</option>

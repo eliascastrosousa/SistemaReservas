@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block 'titulo' %}Professional List {% endblock%}
+{% block 'titulo' %}Patient List {% endblock%}
 
 {% block 'head' %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -13,25 +13,28 @@
 
 
   <div class="row">
-    <h2>Médicos</h2>
+    <h2> Pacientes</h2>
     <hr>
 
     <div class="col-md-4 p-1">
-      <form class="d-flex" role="search" method="GET" action="{% url 'professionalsearch' %}">
+      <form class="d-flex" method="GET" action="{% url 'patientsearch' %}">
         {% csrf_token %}
-        <input class="form-control me-2" type="search" placeholder="Pesquisar Profissional" aria-label="Search"
-          name="search">
-        <button class="btn btn-info" type="submit">Pesquisar</button>
+        <input class="form-control me-2" type="search" placeholder="Pesquisar Paciente" aria-label="Search"
+          name="search" value="{{ request.GET.search }}" autocomplete="off">
+        <button class="btn btn-info" type="submit">Pesquisar</button>      
+        <a href="{% url 'patientlist' %}"> <input type="button" value="Limpar" class="btn btn-unline-warning m-1"> </a>
+
       </form>
+
+      <!--{% url 'patientsearch' %} --> 
     </div>
 
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">CRM</th>
+          <th scope="col">CPF</th>
           <th scope="col">Nome</th>
           <th scope="col">Data Nasc</th>
-          <th scope="col">Especialidade</th>
           <th scope="col">Telefone</th>
           <th scope="col">Detalhes</th>
           <th scope="col">Editar</th>
@@ -40,14 +43,13 @@
 
         </tr>
       </thead>
-      {% for medicos in medicos %}
+      {% for paciente in paciente %}
       <tbody>
         <tr>
-          <th scope="row">{{medicos.crm}}</th>
-          <td>{{medicos.nome}} {{medicos.sobrenome}}</td>
-          <td>{{medicos.datanasc}}</td>
-          <td>{{medicos.especialidade}}</td>
-          <td>{{medicos.telefone}}</td>
+          <th scope="row">{{paciente.cpf}}</th>
+          <td>{{paciente.nome}} {{paciente.sobrenome}}</td>
+          <td>{{paciente.datanasc}}</td>
+          <td>{{paciente.telefone}}</td>
           <td><a href="{% url 'patientregister' %}"> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                 fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -64,15 +66,19 @@
                   d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
               </svg></a></td>
 
+
         </tr>
       </tbody>
+      {% empty %}
+        <tr>
+          <td colspan="3"> Nenhum item encontrado.</td>
+        </tr>
       {% endfor %}
+
     </table>
-
-
     <div class="col-md p-1">
-      <a href="{% url 'professionalregister' %}"><button type="button" class="btn btn-primary"> Cadastrar
-          Médico</button></a>
+      <a href="{% url 'patientregister' %}"><button type="button" class="btn btn-primary"> Cadastrar Paciente
+        </button></a>
     </div>
 
   </div>

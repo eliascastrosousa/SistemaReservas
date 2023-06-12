@@ -23,7 +23,11 @@ urlpatterns = [
     path('', include('reservas.urls')),
     path('auth/', include('usuarios.urls')),
     path('blog/', include('blog.urls')),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path('patient/', include('pacientes.urls')),
+    path('doctor/', include('medicos.urls')),
+    path('consultation/', include('consultas.urls'))
+
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
